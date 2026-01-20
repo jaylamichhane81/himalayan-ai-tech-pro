@@ -32,11 +32,11 @@ export default function Home() {
             <span>Himalayan AI</span>
           </div>
           <div style={{ display: 'flex', gap: '40px', alignItems: 'center' }}>
-            <a href="#features" style={{ color: '#ffffff', textDecoration: 'none', fontSize: '14px', opacity: 0.8, cursor: 'pointer', transition: 'opacity 0.3s' }} onMouseEnter={(e) => e.target.style.opacity = 1} onMouseLeave={(e) => e.target.style.opacity = 0.8}>Features</a>
-            <a href="#pricing" style={{ color: '#ffffff', textDecoration: 'none', fontSize: '14px', opacity: 0.8, cursor: 'pointer', transition: 'opacity 0.3s' }} onMouseEnter={(e) => e.target.style.opacity = 1} onMouseLeave={(e) => e.target.style.opacity = 0.8}>Pricing</a>
-            <a href="/ai-demos" style={{ color: '#ffffff', textDecoration: 'none', fontSize: '14px', opacity: 0.8, cursor: 'pointer', transition: 'opacity 0.3s' }} onMouseEnter={(e) => e.target.style.opacity = 1} onMouseLeave={(e) => e.target.style.opacity = 0.8}>Try AI</a>
-            <a href="/dashboard" style={{ color: '#ffffff', textDecoration: 'none', fontSize: '14px', opacity: 0.8, cursor: 'pointer', transition: 'opacity 0.3s' }} onMouseEnter={(e) => e.target.style.opacity = 1} onMouseLeave={(e) => e.target.style.opacity = 0.8}>Dashboard</a>
-            <button style={{ padding: '8px 20px', background: '#ffffff', color: '#0066cc', border: 'none', borderRadius: '6px', cursor: 'pointer', fontWeight: '600', fontSize: '14px', transition: 'all 0.3s' }} onMouseOver={(e) => { e.target.style.background = '#f0f0f0' }} onMouseOut={(e) => { e.target.style.background = '#ffffff' }}>Sign In</button>
+            <a href="#features" style={{ color: '#ffffff', textDecoration: 'none', fontSize: '14px', opacity: 0.8, cursor: 'pointer', transition: 'opacity 0.3s' }} onMouseEnter={(e: any) => e.target.style.opacity = 1} onMouseLeave={(e: any) => e.target.style.opacity = 0.8}>Features</a>
+            <a href="#pricing" style={{ color: '#ffffff', textDecoration: 'none', fontSize: '14px', opacity: 0.8, cursor: 'pointer', transition: 'opacity 0.3s' }} onMouseEnter={(e: any) => e.target.style.opacity = 1} onMouseLeave={(e: any) => e.target.style.opacity = 0.8}>Pricing</a>
+            <a href="/ai-demos" style={{ color: '#ffffff', textDecoration: 'none', fontSize: '14px', opacity: 0.8, cursor: 'pointer', transition: 'opacity 0.3s' }} onMouseEnter={(e: any) => e.target.style.opacity = 1} onMouseLeave={(e: any) => e.target.style.opacity = 0.8}>Try AI</a>
+            <a href="/dashboard" style={{ color: '#ffffff', textDecoration: 'none', fontSize: '14px', opacity: 0.8, cursor: 'pointer', transition: 'opacity 0.3s' }} onMouseEnter={(e: any) => e.target.style.opacity = 1} onMouseLeave={(e: any) => e.target.style.opacity = 0.8}>Dashboard</a>
+            <button style={{ padding: '8px 20px', background: '#ffffff', color: '#0066cc', border: 'none', borderRadius: '6px', cursor: 'pointer', fontWeight: '600', fontSize: '14px', transition: 'all 0.3s' }} onMouseOver={(e: any) => { e.target.style.background = '#f0f0f0' }} onMouseOut={(e: any) => { e.target.style.background = '#ffffff' }}>Sign In</button>
           </div>
         </div>
       </nav>
@@ -75,10 +75,10 @@ export default function Home() {
           </p>
 
           <div style={{ display: 'flex', gap: '16px', justifyContent: 'center', marginBottom: '60px', flexWrap: 'wrap' }}>
-            <button style={{ padding: '14px 32px', background: 'linear-gradient(135deg, #0066cc 0%, #0096ff 100%)', color: 'white', border: 'none', borderRadius: '8px', fontSize: '16px', fontWeight: '600', cursor: 'pointer', transition: 'all 0.3s' }} onMouseOver={(e) => { e.target.style.transform = 'translateY(-2px)'; e.target.style.boxShadow = '0 10px 30px rgba(0,102,204,0.4)' }} onMouseOut={(e) => { e.target.style.transform = 'translateY(0)'; e.target.style.boxShadow = 'none' }}>
+            <button style={{ padding: '14px 32px', background: 'linear-gradient(135deg, #0066cc 0%, #0096ff 100%)', color: 'white', border: 'none', borderRadius: '8px', fontSize: '16px', fontWeight: '600', cursor: 'pointer', transition: 'all 0.3s' }} onMouseOver={(e: any) => { e.target.style.transform = 'translateY(-2px)'; e.target.style.boxShadow = '0 10px 30px rgba(0,102,204,0.4)' }} onMouseOut={(e: any) => { e.target.style.transform = 'translateY(0)'; e.target.style.boxShadow = 'none' }}>
               Start Free Trial
             </button>
-            <button style={{ padding: '14px 32px', background: 'rgba(255,255,255,0.1)', color: 'white', border: '1px solid rgba(0,102,204,0.5)', borderRadius: '8px', fontSize: '16px', fontWeight: '600', cursor: 'pointer', transition: 'all 0.3s' }} onMouseOver={(e) => { e.target.style.background = 'rgba(0,102,204,0.15)'; e.target.style.borderColor = 'rgba(0,102,204,0.7)' }} onMouseOut={(e) => { e.target.style.background = 'rgba(255,255,255,0.1)'; e.target.style.borderColor = 'rgba(0,102,204,0.5)' }}>
+            <button style={{ padding: '14px 32px', background: 'rgba(255,255,255,0.1)', color: 'white', border: '1px solid rgba(0,102,204,0.5)', borderRadius: '8px', fontSize: '16px', fontWeight: '600', cursor: 'pointer', transition: 'all 0.3s' }} onMouseOver={(e: any) => { e.target.style.background = 'rgba(0,102,204,0.15)'; e.target.style.borderColor = 'rgba(0,102,204,0.7)' }} onMouseOut={(e: any) => { e.target.style.background = 'rgba(255,255,255,0.1)'; e.target.style.borderColor = 'rgba(0,102,204,0.5)' }}>
               View Demo
             </button>
           </div>
@@ -224,7 +224,7 @@ export default function Home() {
         <div style={{ maxWidth: '800px', margin: '0 auto' }}>
           <h2 style={{ fontSize: '48px', fontWeight: '700', marginBottom: '20px' }}>Ready to Get Started?</h2>
           <p style={{ fontSize: '18px', opacity: 0.7, marginBottom: '40px' }}>Join thousands of companies using Himalayan AI to power their business</p>
-          <button style={{ padding: '14px 40px', background: 'linear-gradient(135deg, #0066cc 0%, #0096ff 100%)', color: 'white', border: 'none', borderRadius: '8px', fontSize: '16px', fontWeight: '600', cursor: 'pointer', transition: 'all 0.3s' }} onMouseOver={(e) => { e.target.style.transform = 'translateY(-2px)'; e.target.style.boxShadow = '0 10px 30px rgba(0,102,204,0.4)' }} onMouseOut={(e) => { e.target.style.transform = 'translateY(0)'; e.target.style.boxShadow = 'none' }}>
+          <button style={{ padding: '14px 40px', background: 'linear-gradient(135deg, #0066cc 0%, #0096ff 100%)', color: 'white', border: 'none', borderRadius: '8px', fontSize: '16px', fontWeight: '600', cursor: 'pointer', transition: 'all 0.3s' }} onMouseOver={(e: any) => { e.target.style.transform = 'translateY(-2px)'; e.target.style.boxShadow = '0 10px 30px rgba(0,102,204,0.4)' }} onMouseOut={(e: any) => { e.target.style.transform = 'translateY(0)'; e.target.style.boxShadow = 'none' }}>
             Start Your Free Trial Today
           </button>
         </div>
@@ -244,24 +244,24 @@ export default function Home() {
             <div>
               <h4 style={{ fontSize: '14px', fontWeight: '700', marginBottom: '16px', textTransform: 'uppercase', letterSpacing: '0.5px', opacity: 0.5 }}>Product</h4>
               <ul style={{ listStyle: 'none', padding: 0 }}>
-                <li style={{ marginBottom: '12px' }}><a href="#" style={{ color: '#ffffff', textDecoration: 'none', opacity: 0.7, transition: 'opacity 0.3s', cursor: 'pointer' }} onMouseEnter={(e) => e.target.style.opacity = 1} onMouseLeave={(e) => e.target.style.opacity = 0.7}>Features</a></li>
-                <li style={{ marginBottom: '12px' }}><a href="#" style={{ color: '#ffffff', textDecoration: 'none', opacity: 0.7, transition: 'opacity 0.3s', cursor: 'pointer' }} onMouseEnter={(e) => e.target.style.opacity = 1} onMouseLeave={(e) => e.target.style.opacity = 0.7}>Pricing</a></li>
-                <li style={{ marginBottom: '12px' }}><a href="#" style={{ color: '#ffffff', textDecoration: 'none', opacity: 0.7, transition: 'opacity 0.3s', cursor: 'pointer' }} onMouseEnter={(e) => e.target.style.opacity = 1} onMouseLeave={(e) => e.target.style.opacity = 0.7}>Security</a></li>
+                <li style={{ marginBottom: '12px' }}><a href="#" style={{ color: '#ffffff', textDecoration: 'none', opacity: 0.7, transition: 'opacity 0.3s', cursor: 'pointer' }} onMouseEnter={(e: any) => e.target.style.opacity = 1} onMouseLeave={(e: any) => e.target.style.opacity = 0.7}>Features</a></li>
+                <li style={{ marginBottom: '12px' }}><a href="#" style={{ color: '#ffffff', textDecoration: 'none', opacity: 0.7, transition: 'opacity 0.3s', cursor: 'pointer' }} onMouseEnter={(e: any) => e.target.style.opacity = 1} onMouseLeave={(e: any) => e.target.style.opacity = 0.7}>Pricing</a></li>
+                <li style={{ marginBottom: '12px' }}><a href="#" style={{ color: '#ffffff', textDecoration: 'none', opacity: 0.7, transition: 'opacity 0.3s', cursor: 'pointer' }} onMouseEnter={(e: any) => e.target.style.opacity = 1} onMouseLeave={(e: any) => e.target.style.opacity = 0.7}>Security</a></li>
               </ul>
             </div>
             <div>
               <h4 style={{ fontSize: '14px', fontWeight: '700', marginBottom: '16px', textTransform: 'uppercase', letterSpacing: '0.5px', opacity: 0.5 }}>Company</h4>
               <ul style={{ listStyle: 'none', padding: 0 }}>
-                <li style={{ marginBottom: '12px' }}><a href="#" style={{ color: '#ffffff', textDecoration: 'none', opacity: 0.7, transition: 'opacity 0.3s', cursor: 'pointer' }} onMouseEnter={(e) => e.target.style.opacity = 1} onMouseLeave={(e) => e.target.style.opacity = 0.7}>About</a></li>
-                <li style={{ marginBottom: '12px' }}><a href="#" style={{ color: '#ffffff', textDecoration: 'none', opacity: 0.7, transition: 'opacity 0.3s', cursor: 'pointer' }} onMouseEnter={(e) => e.target.style.opacity = 1} onMouseLeave={(e) => e.target.style.opacity = 0.7}>Blog</a></li>
-                <li style={{ marginBottom: '12px' }}><a href="#" style={{ color: '#ffffff', textDecoration: 'none', opacity: 0.7, transition: 'opacity 0.3s', cursor: 'pointer' }} onMouseEnter={(e) => e.target.style.opacity = 1} onMouseLeave={(e) => e.target.style.opacity = 0.7}>Contact</a></li>
+                <li style={{ marginBottom: '12px' }}><a href="#" style={{ color: '#ffffff', textDecoration: 'none', opacity: 0.7, transition: 'opacity 0.3s', cursor: 'pointer' }} onMouseEnter={(e: any) => e.target.style.opacity = 1} onMouseLeave={(e: any) => e.target.style.opacity = 0.7}>About</a></li>
+                <li style={{ marginBottom: '12px' }}><a href="#" style={{ color: '#ffffff', textDecoration: 'none', opacity: 0.7, transition: 'opacity 0.3s', cursor: 'pointer' }} onMouseEnter={(e: any) => e.target.style.opacity = 1} onMouseLeave={(e: any) => e.target.style.opacity = 0.7}>Blog</a></li>
+                <li style={{ marginBottom: '12px' }}><a href="#" style={{ color: '#ffffff', textDecoration: 'none', opacity: 0.7, transition: 'opacity 0.3s', cursor: 'pointer' }} onMouseEnter={(e: any) => e.target.style.opacity = 1} onMouseLeave={(e: any) => e.target.style.opacity = 0.7}>Contact</a></li>
               </ul>
             </div>
             <div>
               <h4 style={{ fontSize: '14px', fontWeight: '700', marginBottom: '16px', textTransform: 'uppercase', letterSpacing: '0.5px', opacity: 0.5 }}>Legal</h4>
               <ul style={{ listStyle: 'none', padding: 0 }}>
-                <li style={{ marginBottom: '12px' }}><a href="#" style={{ color: '#ffffff', textDecoration: 'none', opacity: 0.7, transition: 'opacity 0.3s', cursor: 'pointer' }} onMouseEnter={(e) => e.target.style.opacity = 1} onMouseLeave={(e) => e.target.style.opacity = 0.7}>Privacy</a></li>
-                <li style={{ marginBottom: '12px' }}><a href="#" style={{ color: '#ffffff', textDecoration: 'none', opacity: 0.7, transition: 'opacity 0.3s', cursor: 'pointer' }} onMouseEnter={(e) => e.target.style.opacity = 1} onMouseLeave={(e) => e.target.style.opacity = 0.7}>Terms</a></li>
+                <li style={{ marginBottom: '12px' }}><a href="#" style={{ color: '#ffffff', textDecoration: 'none', opacity: 0.7, transition: 'opacity 0.3s', cursor: 'pointer' }} onMouseEnter={(e: any) => e.target.style.opacity = 1} onMouseLeave={(e: any) => e.target.style.opacity = 0.7}>Privacy</a></li>
+                <li style={{ marginBottom: '12px' }}><a href="#" style={{ color: '#ffffff', textDecoration: 'none', opacity: 0.7, transition: 'opacity 0.3s', cursor: 'pointer' }} onMouseEnter={(e: any) => e.target.style.opacity = 1} onMouseLeave={(e: any) => e.target.style.opacity = 0.7}>Terms</a></li>
               </ul>
             </div>
           </div>

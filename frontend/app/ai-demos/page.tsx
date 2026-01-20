@@ -133,11 +133,11 @@ export default function AIDemo() {
               cursor: loading ? 'not-allowed' : 'text',
               opacity: loading ? 0.5 : 1,
             }}
-            onFocus={(e) => {
+            onFocus={(e: any) => {
               e.target.style.borderColor = 'rgba(0,102,204,0.6)'
               e.target.style.background = 'rgba(0,102,204,0.08)'
             }}
-            onBlur={(e) => {
+            onBlur={(e: any) => {
               e.target.style.borderColor = 'rgba(0,102,204,0.3)'
               e.target.style.background = 'rgba(0,102,204,0.05)'
             }}
@@ -157,127 +157,13 @@ export default function AIDemo() {
               transition: 'all 0.3s',
               opacity: loading ? 0.5 : 1,
             }}
-            onMouseOver={(e) => {
+            onMouseOver={(e: any) => {
               if (!loading && msg.trim()) {
                 e.target.style.transform = 'translateY(-2px)'
                 e.target.style.boxShadow = '0 10px 30px rgba(0,102,204,0.4)'
               }
             }}
-            onMouseOut={(e) => {
-              e.target.style.transform = 'translateY(0)'
-              e.target.style.boxShadow = 'none'
-            }}
-          >
-            {loading ? 'Sending...' : 'Send'}
-          </button>
-        </div>
-      </div>
-    </div>
-  )
-}
-
-      {/* Main Chat Area */}
-      <div style={{ maxWidth: '900px', margin: '0 auto', padding: '40px 20px', height: 'calc(100vh - 200px)', display: 'flex', flexDirection: 'column' }}>
-        {/* Chat Messages */}
-        <div style={{ flex: 1, overflowY: 'auto', marginBottom: '30px', paddingRight: '10px' }}>
-          {messages.length === 0 ? (
-            <div style={{ textAlign: 'center', height: '100%', display: 'flex', alignItems: 'center', justifyContent: 'center', opacity: 0.5 }}>
-              <div>
-                <div style={{ fontSize: '60px', marginBottom: '20px' }}>💬</div>
-                <p style={{ fontSize: '18px' }}>Start a conversation with our AI assistant</p>
-              </div>
-            </div>
-          ) : (
-            messages.map((msg, idx) => (
-              <div key={idx} style={{ marginBottom: '20px', display: 'flex', justifyContent: msg.role === 'user' ? 'flex-end' : 'flex-start' }}>
-                <div
-                  style={{
-                    maxWidth: '70%',
-                    padding: '12px 18px',
-                    borderRadius: '12px',
-                    background: msg.role === 'user' ? 'linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%)' : 'rgba(255,255,255,0.1)',
-                    border: msg.role === 'user' ? 'none' : '1px solid rgba(255,255,255,0.2)',
-                    wordBreak: 'break-word',
-                    fontSize: '14px',
-                    lineHeight: '1.5'
-                  }}
-                >
-                  {msg.content}
-                </div>
-              </div>
-            ))
-          )}
-          {loading && (
-            <div style={{ display: 'flex', alignItems: 'center', gap: '8px', color: '#6366f1' }}>
-              <span>AI is thinking</span>
-              <div style={{ display: 'flex', gap: '4px' }}>
-                <div style={{ width: '8px', height: '8px', background: '#6366f1', borderRadius: '50%', animation: 'pulse 1.5s infinite' }}></div>
-                <div style={{ width: '8px', height: '8px', background: '#6366f1', borderRadius: '50%', animation: 'pulse 1.5s infinite 0.2s' }}></div>
-                <div style={{ width: '8px', height: '8px', background: '#6366f1', borderRadius: '50%', animation: 'pulse 1.5s infinite 0.4s' }}></div>
-              </div>
-              <style>{`
-                @keyframes pulse {
-                  0%, 100% { opacity: 0.3; }
-                  50% { opacity: 1; }
-                }
-              `}</style>
-            </div>
-          )}
-        </div>
-
-        {/* Input Area */}
-        <div style={{ display: 'flex', gap: '12px', paddingTop: '20px', borderTop: '1px solid rgba(255,255,255,0.1)' }}>
-          <input
-            type="text"
-            value={msg}
-            onChange={(e) => setMsg(e.target.value)}
-            onKeyPress={(e) => e.key === 'Enter' && send()}
-            placeholder="Type your message..."
-            disabled={loading}
-            style={{
-              flex: 1,
-              padding: '12px 16px',
-              background: 'rgba(255,255,255,0.05)',
-              border: '1px solid rgba(255,255,255,0.2)',
-              borderRadius: '8px',
-              color: '#ffffff',
-              fontSize: '14px',
-              outline: 'none',
-              transition: 'all 0.3s',
-              cursor: loading ? 'not-allowed' : 'text',
-              opacity: loading ? 0.5 : 1,
-            }}
-            onFocus={(e) => {
-              e.target.style.borderColor = 'rgba(99,102,241,0.5)'
-              e.target.style.background = 'rgba(255,255,255,0.08)'
-            }}
-            onBlur={(e) => {
-              e.target.style.borderColor = 'rgba(255,255,255,0.2)'
-              e.target.style.background = 'rgba(255,255,255,0.05)'
-            }}
-          />
-          <button
-            onClick={send}
-            disabled={loading || !msg.trim()}
-            style={{
-              padding: '12px 24px',
-              background: 'linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%)',
-              color: '#ffffff',
-              border: 'none',
-              borderRadius: '8px',
-              cursor: loading ? 'not-allowed' : 'pointer',
-              fontWeight: '600',
-              fontSize: '14px',
-              transition: 'all 0.3s',
-              opacity: loading ? 0.5 : 1,
-            }}
-            onMouseOver={(e) => {
-              if (!loading && msg.trim()) {
-                e.target.style.transform = 'translateY(-2px)'
-                e.target.style.boxShadow = '0 10px 30px rgba(99,102,241,0.3)'
-              }
-            }}
-            onMouseOut={(e) => {
+            onMouseOut={(e: any) => {
               e.target.style.transform = 'translateY(0)'
               e.target.style.boxShadow = 'none'
             }}
