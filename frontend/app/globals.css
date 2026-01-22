@@ -107,6 +107,55 @@ body {
   background: linear-gradient(135deg, #0a0a14 0%, #12121f 50%, #0a0a14 100%);
 }
 
+/* Responsive container utilities */
+.section-container {
+  max-width: 7xl;
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: 1rem;
+  padding-right: 1rem;
+}
+
+@media (min-width: 640px) {
+  .section-container {
+    padding-left: 1.5rem;
+    padding-right: 1.5rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  .section-container {
+    padding-left: 2rem;
+    padding-right: 2rem;
+  }
+}
+
+/* Responsive typography */
+h1, .heading-xl {
+  font-size: clamp(1.875rem, 5vw, 3.75rem);
+}
+
+h2, .heading-lg {
+  font-size: clamp(1.5rem, 4vw, 3rem);
+}
+
+h3, .heading-md {
+  font-size: clamp(1.25rem, 3vw, 1.875rem);
+}
+
+/* Mobile-first approach */
+@media (max-width: 640px) {
+  body {
+    font-size: 0.9375rem;
+  }
+  
+  .btn-primary,
+  .btn-secondary {
+    padding: 0.625rem 1.25rem;
+    font-size: 0.8125rem;
+  }
+}
+
 /* Premium card */
 .card-premium {
   background: rgba(255, 255, 255, 0.08);
@@ -124,4 +173,10 @@ body {
   border-color: rgba(0, 212, 255, 0.2);
   box-shadow: 0 8px 32px rgba(0, 212, 255, 0.2);
   transform: translateY(-4px);
+}
+
+@media (max-width: 640px) {
+  .card-premium {
+    padding: 1.5rem;
+  }
 }
