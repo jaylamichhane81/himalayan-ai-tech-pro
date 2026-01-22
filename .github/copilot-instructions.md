@@ -5,8 +5,8 @@
 **Himalayan AI Tech Pro** is a full-stack web application with a FastAPI backend and Next.js frontend. The backend serves as the core API handling authentication, AI chat, blog management, payments, and contact forms. The frontend is a React-based UI for accessing these services.
 
 **Tech Stack:**
-- Backend: FastAPI (Python) with SQLAlchemy ORM, PostgreSQL
-- Frontend: Next.js (TypeScript/React)  
+- **Backend**: FastAPI (Python) with SQLAlchemy ORM, PostgreSQL
+- **Frontend**: Next.js 15+ (TypeScript/React) with Tailwind CSS 4.1, Framer Motion for animations  
 - Deployment: Render (via `render.yaml`)
 - Payments: Khalti and eSewa integration support
 
@@ -24,11 +24,11 @@ The backend uses FastAPI's modular router pattern. All routes are defined in `ro
   - `contact.py` - Contact form: POST `/contact/` saves messages in-memory
 - **Database**: `database/connection.py` uses SQLAlchemy with PostgreSQL (connection string from `DATABASE_URL` env var)
 
-### Frontend Structure (`frontend/app/`)
-Next.js 13+ app router (file-based routing):
-- `page.tsx` - Home page (landing)
-- `ai-demos/page.tsx` - AI chat demo with "use client" directive
-- `dashboard/page.tsx` - Admin dashboard
+### Frontend Structure (`frontend/app/` & `frontend/components/`)
+Next.js 15+ app router (file-based routing):
+- `layout.tsx` - Root layout; imports all page components
+- `page.tsx` - Home landing page composed of reusable components (Header, Hero, Services, WhyUs, CTA, Contact, Founder, Footer)
+- `components/` - Reusable React components (all using Tailwind CSS 4.1 and Framer Motion for animations)
 
 ## Key Conventions & Patterns
 
@@ -52,10 +52,11 @@ Next.js 13+ app router (file-based routing):
 3. **CORS**: Configured in `main.py` with `allow_origins=["*"]`; no per-endpoint configuration needed
 
 ### Frontend Patterns
-1. **Page Structure**: Routes are directories containing `page.tsx` (Next.js convention)
-2. **"use client"**: `ai-demos/page.tsx` uses `"use client"` directive for client-side interactivity (hooks)
-3. **Styling**: Inline `style={{...}}` props; no CSS modules observed
-4. **API Calls**: Uses `process.env.NEXT_PUBLIC_API_URL` for backend base URL (environment-dependent)
+1. **Page Structure**: `layout.tsx` is the root layout. Home is in `page.tsx`. All components live in `frontend/components/` (Next.js convention)
+2. **Component Composition**: Pages import and compose components (e.g., `page.tsx` imports Header, Hero, Services, etc.). Components use Tailwind CSS 4.1 classes
+3. **Animations**: Framer Motion library available (imported in package.json) for motion effects
+4. **Styling**: Tailwind CSS 4.1 with `globals.css` and `tailwind.config.js`; some inline `style={{...}}` props
+5. **API Calls**: Uses `process.env.NEXT_PUBLIC_API_URL` for backend base URL (set in `.env.local`)
 
 ## Important Files & Commands
 
@@ -70,9 +71,9 @@ Next.js 13+ app router (file-based routing):
 ## Integration Points
 
 1. **Frontend → Backend**: 
-   - Base URL from `process.env.NEXT_PUBLIC_API_URL`
-   - Example: `ai-demos/page.tsx` calls `{NEXT_PUBLIC_API_URL}/ai/chat` to send messages
-   - Dev typically uses `http://localhost:10000`; production uses deployed URL
+   - Base URL from `process.env.NEXT_PUBLIC_API_URL` (defined in `.env.local`)
+   - Dev: `http://localhost:10000`; production: deployed Render backend URL
+   - All requests are HTTP GET/POST (no WebSockets)
 
 2. **Authentication**: 
    - POST to `/auth/login` with `{"username": "admin", "password": "admin123"}`
