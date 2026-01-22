@@ -1,6 +1,7 @@
 'use client'
 
 import { motion } from 'framer-motion'
+import Image from 'next/image'
 
 export function Hero() {
   const scrollToContact = () => {
@@ -18,7 +19,7 @@ export function Hero() {
           rotate: [0, 180, 360],
         }}
         transition={{ duration: 20, repeat: Infinity }}
-        className="absolute top-20 right-10 w-96 h-96 bg-primary/20 rounded-full blur-3xl opacity-20"
+        className="absolute top-20 right-10 w-96 h-96 bg-ai-cyan/20 rounded-full blur-3xl opacity-20"
       />
       <motion.div 
         animate={{ 
@@ -26,7 +27,7 @@ export function Hero() {
           rotate: [360, 180, 0],
         }}
         transition={{ duration: 25, repeat: Infinity }}
-        className="absolute bottom-20 left-10 w-80 h-80 bg-accent/20 rounded-full blur-3xl opacity-20"
+        className="absolute bottom-20 left-10 w-80 h-80 bg-ai-purple/20 rounded-full blur-3xl opacity-20"
       />
 
       <div className="relative z-10 section-container text-center">
@@ -36,21 +37,21 @@ export function Hero() {
           transition={{ duration: 0.8 }}
         >
           <motion.h1 
-            className="heading-xl mb-6 text-gradient"
+            className="text-5xl md:text-7xl font-bold mb-6 text-gradient"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ delay: 0.2, duration: 0.8 }}
           >
-            Build AI-Powered Solutions That Scale
+            AI-Powered Solutions That Scale
           </motion.h1>
 
           <motion.p
-            className="text-xl text-gray-300 mb-12 max-w-3xl mx-auto leading-relaxed"
+            className="text-xl text-slate-300 mb-12 max-w-3xl mx-auto leading-relaxed"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ delay: 0.4, duration: 0.8 }}
           >
-            We deliver high-impact AI solutions: custom web applications, intelligent automation, and agentic AI—built with FastAPI, n8n, and modern LLMs.
+            Enterprise-grade AI solutions: custom applications, intelligent automation, and agentic AI—crafted with FastAPI, n8n, and advanced LLMs.
           </motion.p>
 
           <motion.div
@@ -63,15 +64,15 @@ export function Hero() {
               whileHover={{ scale: 1.05, boxShadow: '0 0 40px rgba(0, 212, 255, 0.5)' }}
               whileTap={{ scale: 0.95 }}
               onClick={scrollToContact}
-              className="btn-primary text-lg"
+              className="btn-primary text-lg px-8 py-3"
             >
-              Book Free AI Consultation
+              Book Free Consultation
             </motion.button>
 
             <motion.button
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
-              className="btn-secondary text-lg"
+              className="btn-secondary text-lg px-8 py-3"
             >
               Explore Services
             </motion.button>

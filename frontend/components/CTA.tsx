@@ -15,18 +15,18 @@ export function CTA() {
         whileInView={{ opacity: 1, scale: 1 }}
         transition={{ duration: 0.8 }}
         viewport={{ once: true }}
-        className="relative glass-effect p-12 md:p-20 text-center overflow-hidden"
+        className="relative card-premium md:p-20 text-center overflow-hidden border-ai-cyan/30 hover:border-ai-cyan/60"
       >
         {/* Background gradient animation */}
         <motion.div
           animate={{ rotate: 360 }}
           transition={{ duration: 20, repeat: Infinity, ease: 'linear' }}
-          className="absolute inset-0 bg-gradient-to-r from-primary/10 to-accent/10 opacity-30"
+          className="absolute inset-0 bg-gradient-to-r from-ai-cyan/10 to-ai-purple/10 opacity-30"
         />
 
         <div className="relative z-10">
           <motion.h2
-            className="heading-lg mb-6 text-gradient"
+            className="text-4xl md:text-5xl font-bold mb-6 text-gradient"
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.2, duration: 0.8 }}
@@ -36,13 +36,13 @@ export function CTA() {
           </motion.h2>
 
           <motion.p
-            className="text-xl text-gray-300 mb-12 max-w-2xl mx-auto"
+            className="text-xl text-slate-300 mb-12 max-w-2xl mx-auto"
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.4, duration: 0.8 }}
             viewport={{ once: true }}
           >
-            Get expert guidance on AI solutions tailored to your needs. Book a free consultation today.
+            Enterprise-grade AI solutions. Free consultation with founder expertise.
           </motion.p>
 
           <motion.div
@@ -56,7 +56,7 @@ export function CTA() {
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
               onClick={scrollToContact}
-              className="btn-primary text-lg"
+              className="btn-primary text-lg px-8 py-3"
             >
               Book Free Consultation
             </motion.button>

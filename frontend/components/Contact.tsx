@@ -30,7 +30,7 @@ export function Contact() {
   }
 
   return (
-    <section id="contact" className="section-container">
+    <section id="contact" className="section-container py-20">
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         whileInView={{ opacity: 1, y: 0 }}
@@ -38,21 +38,21 @@ export function Contact() {
         viewport={{ once: true }}
         className="max-w-2xl mx-auto"
       >
-        <h2 className="heading-lg text-center mb-4">Let's Build Something Great</h2>
-        <p className="text-center text-gray-400 mb-12">
-          Ready to bring your AI vision to life? Share your project details and we'll be in touch.
+        <h2 className="text-4xl md:text-5xl font-bold text-center mb-4 text-gradient">Let's Build Something Great</h2>
+        <p className="text-center text-slate-400 mb-12 text-lg">
+          Transform your vision into reality. Share your project details and we'll craft the perfect AI solution.
         </p>
 
         <motion.form
           onSubmit={handleSubmit}
-          className="glass-effect p-8 space-y-6"
+          className="card-premium space-y-6 border-ai-cyan/20 hover:border-ai-cyan/50"
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.2 }}
           viewport={{ once: true }}
         >
           <div>
-            <label className="block text-sm font-medium text-gray-300 mb-2">
+            <label className="block text-sm font-medium text-slate-300 mb-2">
               Your Name
             </label>
             <input
@@ -60,13 +60,13 @@ export function Contact() {
               value={formData.name}
               onChange={(e) => setFormData({ ...formData, name: e.target.value })}
               placeholder="Jayram Lamichhane"
-              className="w-full px-4 py-3 bg-white/5 border border-white/10 rounded-lg text-white placeholder-gray-500 focus:outline-none focus:border-primary transition-colors"
+              className="w-full px-4 py-3 bg-white/5 border border-ai-cyan/20 rounded-lg text-white placeholder-slate-500 focus:outline-none focus:border-ai-cyan focus:ring-1 focus:ring-ai-cyan/30 transition-all"
               required
             />
           </div>
 
           <div>
-            <label className="block text-sm font-medium text-gray-300 mb-2">
+            <label className="block text-sm font-medium text-slate-300 mb-2">
               Email Address
             </label>
             <input
@@ -74,13 +74,13 @@ export function Contact() {
               value={formData.email}
               onChange={(e) => setFormData({ ...formData, email: e.target.value })}
               placeholder="you@company.com"
-              className="w-full px-4 py-3 bg-white/5 border border-white/10 rounded-lg text-white placeholder-gray-500 focus:outline-none focus:border-primary transition-colors"
+              className="w-full px-4 py-3 bg-white/5 border border-ai-cyan/20 rounded-lg text-white placeholder-slate-500 focus:outline-none focus:border-ai-cyan focus:ring-1 focus:ring-ai-cyan/30 transition-all"
               required
             />
           </div>
 
           <div>
-            <label className="block text-sm font-medium text-gray-300 mb-2">
+            <label className="block text-sm font-medium text-slate-300 mb-2">
               Project Description
             </label>
             <textarea
@@ -88,7 +88,7 @@ export function Contact() {
               onChange={(e) => setFormData({ ...formData, project: e.target.value })}
               placeholder="Describe your AI project, goals, and timeline..."
               rows={5}
-              className="w-full px-4 py-3 bg-white/5 border border-white/10 rounded-lg text-white placeholder-gray-500 focus:outline-none focus:border-primary transition-colors resize-none"
+              className="w-full px-4 py-3 bg-white/5 border border-ai-cyan/20 rounded-lg text-white placeholder-slate-500 focus:outline-none focus:border-ai-cyan focus:ring-1 focus:ring-ai-cyan/30 transition-all resize-none"
               required
             />
           </div>
@@ -97,7 +97,7 @@ export function Contact() {
             type="submit"
             whileHover={{ scale: 1.05, boxShadow: '0 0 40px rgba(0, 212, 255, 0.5)' }}
             whileTap={{ scale: 0.95 }}
-            className="w-full btn-primary"
+            className="w-full btn-primary text-lg py-3"
           >
             {submitted ? '✓ Message Sent!' : 'Send Project Details'}
           </motion.button>
