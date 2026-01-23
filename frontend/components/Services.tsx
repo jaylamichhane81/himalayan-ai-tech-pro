@@ -5,21 +5,21 @@ import { motion } from 'framer-motion'
 const services = [
   {
     icon: '🧠',
-    title: 'AI Web Applications',
-    description: 'Enterprise-grade web apps powered by LLMs, RAG systems, and intelligent workflows. FastAPI backends with modern React/Next.js frontends.',
-    features: ['Real-time AI responses', 'Scalable infrastructure', 'Custom LLM integration'],
+    title: 'Custom AI Applications',
+    description: 'Enterprise-grade web apps with LLM integration, RAG systems, and real-time intelligence. Built for scalability and performance.',
+    features: ['LLM Integration', 'Real-time Processing', '24/7 Support'],
   },
   {
     icon: '⚙️',
-    title: 'AI Automation (n8n)',
-    description: 'Low-code intelligent automation. Connect APIs, automate workflows, and eliminate manual tasks with visual precision.',
-    features: ['Smart workflows', 'API orchestration', 'Cost-effective scaling'],
+    title: 'Intelligent Automation',
+    description: 'Visual workflow automation with n8n. Eliminate manual tasks, reduce costs, and scale operations instantly.',
+    features: ['Process Automation', 'API Integration', 'Data Orchestration'],
   },
   {
-    icon: '💬',
-    title: 'AI Chatbots & Agents',
-    description: 'Autonomous conversational agents with contextual understanding, continuous learning, and complex task handling.',
-    features: ['24/7 availability', 'Multi-language support', 'Autonomous reasoning'],
+    icon: '🤖',
+    title: 'Autonomous AI Agents',
+    description: 'Intelligent agents that reason, learn, and execute complex business logic autonomously. Maximized efficiency.',
+    features: ['Autonomous Tasks', 'Intelligent Reasoning', 'Context Awareness'],
   },
 ]
 
@@ -32,9 +32,9 @@ export function Services() {
         transition={{ duration: 0.8 }}
         viewport={{ once: true }}
       >
-        <h2 className="text-4xl md:text-5xl font-bold text-center mb-4 text-gradient">Our Services</h2>
+        <h2 className="text-4xl md:text-5xl font-bold text-center mb-4 text-gradient">Services Built for Business Growth</h2>
         <p className="text-center text-slate-400 max-w-2xl mx-auto mb-16 text-lg">
-          Premium AI solutions crafted for enterprise needs. From intelligent automation to agentic systems.
+          Three proven AI solutions to transform your operations, reduce costs, and stay competitive.
         </p>
 
         <div className="grid md:grid-cols-3 gap-8">

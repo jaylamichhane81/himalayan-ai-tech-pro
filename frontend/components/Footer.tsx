@@ -26,11 +26,31 @@ export function Footer() {
           />
         </motion.div>
         
-        <p className="mb-6 text-slate-300 text-sm">
-          © 2026 Himalayan AI Tech. Premium AI Solutions.
-        </p>
+        <div className="text-center mb-8">
+          <p className="text-slate-300 font-semibold text-sm mb-2">
+            Himalayan AI Tech
+          </p>
+          <p className="text-slate-500 text-xs">
+            Enterprise AI Solutions • Fast Delivery • Proven Results
+          </p>
+        </div>
+
+        {/* Credentials */}
+        <motion.div 
+          className="flex flex-wrap justify-center gap-4 mb-8 py-6 border-y border-ai-cyan/10"
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 1 }}
+          transition={{ delay: 0.2, duration: 0.8 }}
+          viewport={{ once: true }}
+        >
+          {['✓ 50+ Projects', '✓ 4-Day MVP', '✓ 99.9% Uptime', '✓ 100% Satisfaction'].map((cred) => (
+            <span key={cred} className="text-xs text-ai-cyan font-semibold">
+              {cred}
+            </span>
+          ))}
+        </motion.div>
         
-        <div className="flex justify-center gap-8 text-sm">
+        <div className="flex justify-center gap-8 text-sm mb-8">
           <motion.a 
             href="#" 
             whileHover={{ color: '#00d4ff' }}
@@ -55,14 +75,17 @@ export function Footer() {
         </div>
 
         <motion.div
-          className="mt-8 pt-6 border-t border-ai-cyan/10"
+          className="pt-6 border-t border-ai-cyan/10 text-center"
           initial={{ opacity: 0 }}
           whileInView={{ opacity: 1 }}
           transition={{ delay: 0.3, duration: 0.8 }}
           viewport={{ once: true }}
         >
           <p className="text-xs text-slate-500">
-            Crafted with precision. Powered by AI. Built to scale.
+            © 2026 Himalayan AI Tech. All rights reserved.
+          </p>
+          <p className="text-xs text-slate-600 mt-2">
+            Built with precision. Powered by AI. Trusted by businesses.
           </p>
         </motion.div>
       </div>

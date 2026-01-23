@@ -2,7 +2,8 @@
 const nextConfig = {
   reactStrictMode: true,
   images: {
-    unoptimized: true,
+    unoptimized: process.env.NODE_ENV === 'development',
+    formats: ['image/avif', 'image/webp'],
   },
   typescript: {
     ignoreBuildErrors: false,
@@ -10,6 +11,12 @@ const nextConfig = {
   eslint: {
     ignoreDuringBuilds: false,
   },
+  compress: true,
+  poweredByHeader: false,
+  productionBrowserSourceMaps: false,
+  swcMinify: true,
+  redirects: async () => [],
+  rewrites: async () => [],
 }
 
 module.exports = nextConfig
