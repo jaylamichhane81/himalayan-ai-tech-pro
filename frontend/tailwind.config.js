@@ -57,8 +57,3 @@ module.exports = {
           '0%': { backgroundPosition: '-1000px 0' },
           '100%': { backgroundPosition: '1000px 0' },
         },
-      },
-    },
-  },
-  plugins: [],
-};
