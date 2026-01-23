@@ -32,7 +32,7 @@ export function CTA() {
             transition={{ delay: 0.2, duration: 0.8 }}
             viewport={{ once: true }}
           >
-            Ready to Transform Your Business with AI?
+            Ready to Transform Your Business?
           </motion.h2>
 
           <motion.p
@@ -42,7 +42,7 @@ export function CTA() {
             transition={{ delay: 0.4, duration: 0.8 }}
             viewport={{ once: true }}
           >
-            Enterprise-grade AI solutions. Free consultation with founder expertise.
+            Get a free AI audit tailored to your business. Discover opportunities, understand costs, and launch faster.
           </motion.p>
 
           <motion.div

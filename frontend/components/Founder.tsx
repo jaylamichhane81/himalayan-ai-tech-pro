@@ -23,16 +23,15 @@ export function Founder() {
             👨‍💻
           </motion.div>
 
-          <h2 className="text-3xl md:text-4xl font-bold mb-6 text-gradient">Founder-Led Excellence</h2>
+          <h2 className="text-3xl md:text-4xl font-bold mb-6 text-gradient">Founder-Led Excellence & Accountability</h2>
 
-          <p className="text-slate-300 leading-relaxed mb-6 text-lg">
-            I'm building Himalayan AI to deliver premium AI solutions with founder-level precision. 
-            Direct access, rapid execution, uncompromising quality.
+          <p className="text-slate-300 leading-relaxed mb-4 text-lg">
+            I'm Jayram Lamichhane, building Himalayan AI with a commitment to engineering excellence. 
+            Every project gets founder-level attention and accountability.
           </p>
 
           <p className="text-slate-400 mb-8">
-            Every project receives founder attention. No layers, no delays—just engineering excellence 
-            and business results that matter.
+            No layers. No delays. Direct access to expertise. We deliver what we promise.
           </p>
 
           <motion.div
