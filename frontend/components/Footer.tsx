@@ -53,7 +53,10 @@ export function Footer() {
           viewport={{ once: true }}
         >
           <p className="text-xs text-slate-500">
-            © 2026 Himalayan AI Tech Pro. All rights reserved. | Crafted for Excellence.
+            AI solutions, automation & intelligent systems for modern businesses.
+          </p>
+          <p className="text-xs text-slate-600 mt-2">
+            © 2026 Himalayan AI Tech. All rights reserved.
           </p>
         </motion.div>
       </div>
