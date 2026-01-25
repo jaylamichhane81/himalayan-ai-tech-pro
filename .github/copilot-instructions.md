@@ -36,20 +36,28 @@ Next.js 15+ app router (file-based routing):
 1. **Router Convention**: All routers follow this structure:
    ```python
    from fastapi import APIRouter
+   from .auth import verify_token  # For protected endpoints
+   
    router = APIRouter(prefix="/endpoint")
    
    @router.post("/")
-   def handler(data: dict):
-       return {"status": "message"}
+   def handler(data: PydanticModel):
+       return {"status": "success", "data": result}
    ```
    - Define `router = APIRouter(prefix="/...")` at module top
-   - Use dict parameters for POST requests (no Pydantic validation yet)
+   - **Use Pydantic models** for all request/response validation (defined in `models.py`)
+   - Protected endpoints require `Depends(verify_token)` parameter
    - Return dicts; FastAPI auto-serializes to JSON
-   - Errors use `HTTPException(status_code, message)`
+   - Errors use `HTTPException(status_code=401, detail="message")`
 
-2. **In-Memory Storage**: `blog.py` and `contact.py` use module-level lists `blogs = []` and `messages = []`—data persists only during server runtime (MVP pattern)
+2. **In-Memory Storage**: `blog.py`, `contact.py`, `payment.py` use module-level lists (`blogs = []`, `messages = []`, `payment_history = []`)—**data is ephemeral** and lost on server restart
 
-3. **CORS**: Configured in `main.py` with `allow_origins=["*"]`; no per-endpoint configuration needed
+3. **Authentication**: 
+   - JWT tokens with 30-minute expiration
+   - Credentials from env vars: `ADMIN_USERNAME`, `ADMIN_PASSWORD`, `JWT_SECRET`
+   - Protected endpoints use `verify_token` dependency to get username
+
+4. **CORS**: Configured in `main.py` from `ALLOWED_ORIGINS` env var; defaults to `http://localhost:3000,http://localhost:10000`
 
 ### Frontend Patterns
 1. **Page Structure**: `layout.tsx` is the root layout. Home is in `page.tsx`. All components live in `frontend/components/` (Next.js convention)
@@ -71,17 +79,22 @@ Next.js 15+ app router (file-based routing):
 ## Integration Points
 
 1. **Frontend → Backend**: 
-   - Base URL from `process.env.NEXT_PUBLIC_API_URL` (defined in `.env.local`)
-   - Dev: `http://localhost:10000`; production: deployed Render backend URL
-   - All requests are HTTP GET/POST (no WebSockets)
+   - Base URL from `process.env.NEXT_PUBLIC_API_URL` (e.g., `.env.local`)
+   - Dev: `http://localhost:10000`; production: Render backend URL
+   - `lib/api.ts` provides `ApiClient` class for centralized requests with error handling
+   - All requests use `Content-Type: application/json`
 
-2. **Authentication**: 
-   - POST to `/auth/login` with `{"username": "admin", "password": "admin123"}`
-   - Returns `{"token": "<jwt_token>"}` (JWT encoded with SECRET key)
+2. **Authentication Flow**: 
+   - Frontend calls `/auth/login` with `{"username": "admin", "password": "admin123"}`
+   - Returns `{"access_token": "...", "token_type": "bearer", "expires_in": 1800}`
+   - Protected endpoints use `Authorization: Bearer <token>` header (handled by `HTTPBearer()` in routers)
 
-3. **AI Chat**: POST `/ai/chat` with `{"message": "..."}`, returns `{"reply": "..."`
+3. **Request/Response Contracts**: All payloads use Pydantic models (defined in `models.py`):
+   - Requests validated by `@router.post()` parameter type hints
+   - Responses automatically serialized from model instances
+   - Invalid requests return 422 with field error details
 
-4. **In-Memory Operations**: Blog and contact data is stored in-memory lists; implement database persistence when scaling
+4. **In-Memory State**: `dashboard.py` aggregates data from `blog`, `contact`, `payment` modules via shared list imports—changes across routers affect all stats queries
 
 ## Development Workflow
 
@@ -98,8 +111,61 @@ Next.js 15+ app router (file-based routing):
 
 ## Critical Gotchas & Notes
 
-- **Hardcoded credentials**: `admin/admin123` in `auth.py`—replace with env vars for production
-- **Hardcoded JWT secret**: `SECRET = "himalayan-secret-key"` in `auth.py`—move to env var
-- **In-memory storage**: All data in `blog.py` and `contact.py` is lost on server restart
-- **PostgreSQL not configured**: `DATABASE_URL` in `database/connection.py` is a template; set via env for actual database connection
-- **No validation**: Routers accept dict parameters without Pydantic validation (add BaseModel classes as needed)
+- **Pydantic validation is active**: All router endpoints use Pydantic models from `models.py`. Missing required fields or type mismatches return 422 errors. Always check `models.py` when adding endpoints.
+- **In-memory storage**: All data in module-level lists (`blogs`, `messages`, `payment_history`) is lost on server restart—**not suitable for production**. Implement database persistence before scaling.
+- **Dashboard aggregation**: `dashboard.py` directly imports lists from other routers (e.g., `from .contact import messages`). Changes to data structures require updates across multiple files.
+- **JWT token expiry**: Tokens expire after 30 minutes. Frontend must handle 401 responses and prompt re-authentication.
+- **Environment variables**: 
+  - `JWT_SECRET`, `ADMIN_USERNAME`, `ADMIN_PASSWORD` have defaults for dev but MUST be set in production
+  - `ALLOWED_ORIGINS` defaults to `http://localhost:3000,http://localhost:10000`; update for production domains
+- **PostgreSQL unused**: `database/connection.py` is a stub; current app uses only in-memory storage
+
+## Quick Examples
+
+**Adding a new protected endpoint**:
+```python
+# backend/app/routers/new_feature.py
+from fastapi import APIRouter, Depends
+from ..models import NewRequest, NewResponse
+from .auth import verify_token
+
+router = APIRouter(prefix="/feature")
+
+@router.post("/action", response_model=NewResponse)
+def do_action(req: NewRequest, username: str = Depends(verify_token)):
+    # Only authenticated users can access
+    return NewResponse(status="success", data=...)
+```
+
+Then in `backend/app/main.py`:
+```python
+from .routers import new_feature
+app.include_router(new_feature.router)
+```
+
+**Adding validation model to `models.py`**:
+```python
+from pydantic import BaseModel, Field
+
+class NewRequest(BaseModel):
+    name: str = Field(..., min_length=3, max_length=100)
+    email: str  # Use EmailStr for emails
+
+class NewResponse(BaseModel):
+    status: str
+    data: dict
+```
+
+**Frontend API call using ApiClient**:
+```typescript
+// frontend/lib/api.ts already has ApiClient configured
+const client = new ApiClient()
+const response = await client.post<ChatResponse>('/ai/chat', { message: 'Hello' })
+```
+
+## Data Flow Summary
+
+- **User authenticates**: Frontend → POST `/auth/login` → Backend generates JWT
+- **Protected operations**: Frontend includes `Authorization: Bearer <token>` → Backend validates with `verify_token`
+- **State aggregation**: `dashboard.py` imports shared lists from `blog`, `contact`, `payment` modules → stats queries reflect live data
+- **Persistence gap**: Currently all data ephemeral; database layer prepared but unused
