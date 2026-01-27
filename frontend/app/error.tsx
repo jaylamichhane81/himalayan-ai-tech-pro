@@ -11,7 +11,7 @@ export default function Error({
   reset: () => void
 }) {
   useEffect(() => {
-    console.error('Application error:', error)
+    // Error is logged by Next.js automatically in development
   }, [error])
 
   return (

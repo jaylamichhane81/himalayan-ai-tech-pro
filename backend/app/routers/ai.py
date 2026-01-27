@@ -1,18 +1,24 @@
+"""
+AI Chat Router
+Handles AI chatbot interactions with conversation history persistence
+"""
 
-from fastapi import APIRouter, HTTPException
+from fastapi import APIRouter, HTTPException, Depends
 from datetime import datetime
+from sqlalchemy.orm import Session
 import uuid
 import os
+
 from ..models import ChatRequest, ChatResponse
+from ..database.connection import get_db
+from ..database.models import ChatSession as ChatSessionModel
 
 router = APIRouter(prefix="/ai")
 
-# Chat history storage (use database in production)
-chat_sessions = []
-
-# LLM Configuration (placeholder for OpenAI/other LLM integration)
+# LLM Configuration
 LLM_API_KEY = os.getenv("OPENAI_API_KEY", "")
 LLM_MODEL = os.getenv("LLM_MODEL", "gpt-3.5-turbo")
+
 
 def get_ai_response(message: str) -> str:
     """
@@ -48,11 +54,12 @@ def get_ai_response(message: str) -> str:
     
     return f"That's an interesting question! Regarding '{message}' - I'd recommend contacting our team directly for the most accurate information. We'd love to discuss your specific needs!"
 
+
 @router.post("/chat", response_model=ChatResponse)
-def chat(request: ChatRequest):
+def chat(request: ChatRequest, db: Session = Depends(get_db)):
     """
     AI Chat endpoint
-    Accepts user messages and returns AI responses
+    Accepts user messages and returns AI responses with persistent history
     """
     try:
         if not request.message.strip():
@@ -64,38 +71,54 @@ def chat(request: ChatRequest):
         # Get AI response
         reply = get_ai_response(request.message)
         
-        # Create chat session record
-        chat_record = {
-            "id": str(uuid.uuid4()),
-            "session_id": request.session_id or str(uuid.uuid4()),
-            "user_message": request.message,
-            "ai_reply": reply,
-            "created_at": datetime.utcnow().isoformat(),
-            "user_info": request.user_info or "anonymous"
-        }
+        # Create session ID if not provided
+        session_id = request.session_id or str(uuid.uuid4())
         
-        chat_sessions.append(chat_record)
+        # Store chat record in database
+        chat_record = ChatSessionModel(
+            id=str(uuid.uuid4()),
+            session_id=session_id,
+            user_message=request.message,
+            ai_reply=reply,
+            user_info="user"
+        )
+        
+        db.add(chat_record)
+        db.commit()
+        db.refresh(chat_record)
         
         return ChatResponse(
-            status="success",
-            message=request.message,
             reply=reply,
-            session_id=chat_record["session_id"]
+            session_id=session_id,
+            timestamp=chat_record.created_at
         )
     
     except HTTPException:
         raise
     except Exception as e:
+        db.rollback()
         raise HTTPException(status_code=500, detail=f"Chat error: {str(e)}")
 
+
 @router.get("/chat/history/{session_id}")
-def get_chat_history(session_id: str, limit: int = 50):
+def get_chat_history(session_id: str, limit: int = 50, db: Session = Depends(get_db)):
     """Get chat history for a session"""
-    history = [c for c in chat_sessions if c.get("session_id") == session_id]
+    history = db.query(ChatSessionModel).filter(
+        ChatSessionModel.session_id == session_id
+    ).order_by(ChatSessionModel.created_at).limit(limit).all()
+    
     return {
         "session_id": session_id,
         "total_messages": len(history),
-        "messages": history[-limit:]
+        "messages": [
+            {
+                "id": h.id,
+                "user_message": h.user_message,
+                "ai_reply": h.ai_reply,
+                "created_at": h.created_at.isoformat(),
+            }
+            for h in history
+        ]
     }
 
 @router.get("/stats")

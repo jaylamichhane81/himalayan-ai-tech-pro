@@ -72,7 +72,6 @@ export function Contact() {
     } catch (err) {
       const errorMessage = err instanceof Error ? err.message : 'Failed to send message. Please try again.'
       setError(errorMessage)
-      console.error('Form submission error:', err)
     } finally {
       setLoading(false)
     }
