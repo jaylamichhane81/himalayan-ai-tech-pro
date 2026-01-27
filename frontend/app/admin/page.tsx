@@ -83,7 +83,7 @@ export default function AdminDashboard() {
         setContacts(contactsData.slice(0, 5))
       }
     } catch (err) {
-      console.error('Failed to fetch dashboard data:', err)
+      // Error handling for fetch failures
     }
   }
 
