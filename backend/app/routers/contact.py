@@ -12,6 +12,8 @@ import uuid
 from ..models import ContactRequest, ContactResponse
 from ..database.connection import get_db
 from ..database.models import Contact as ContactModel
+from .auth import verify_token
+from ..middleware import limiter
 
 router = APIRouter(prefix="/contact")
 
@@ -48,8 +50,8 @@ def save_contact(data: ContactRequest, db: Session = Depends(get_db)):
 
 
 @router.get("/")
-def get_contacts(db: Session = Depends(get_db)):
-    """Get all contacts (admin endpoint - implement auth if needed)"""
+def get_contacts(db: Session = Depends(get_db), username: str = Depends(verify_token)):
+    """Get all contacts (admin endpoint - requires authentication)"""
     contacts = db.query(ContactModel).all()
     return {
         "total": len(contacts),

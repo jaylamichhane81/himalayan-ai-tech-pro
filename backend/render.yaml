@@ -1,7 +1,33 @@
 
 services:
-- type: web
-  name: himalayan-ai-tech-pro
-  env: python
-  buildCommand: pip install -r requirements.txt
-  startCommand: uvicorn app.main:app --host 0.0.0.0 --port 10000
+  - type: web
+    name: himalayan-ai-tech-pro
+    env: python
+    plan: free
+    runtime: python-3.12
+    region: oregon
+    
+    buildCommand: pip install --upgrade pip && pip install -r requirements.txt
+    startCommand: uvicorn app.main:app --host 0.0.0.0 --port 10000
+    
+    envVars:
+      - key: ENVIRONMENT
+        value: production
+      - key: PORT
+        value: 10000
+      - key: LOG_LEVEL
+        value: INFO
+    
+    # Reference your PostgreSQL database
+    # Create this in Render dashboard and link it
+    # The DATABASE_URL will be auto-injected when linked
+    
+    # You'll need to set these in Render dashboard Env vars:
+    # - DATABASE_URL (from PostgreSQL instance)
+    # - JWT_SECRET (generate a strong key: python -c "import secrets; print(secrets.token_urlsafe(32))")
+    # - ADMIN_USERNAME (set a unique username)
+    # - ADMIN_PASSWORD (set a strong password)
+    # - ALLOWED_ORIGINS (your frontend URL: https://yourdomain.com)
+    # - OPENAI_API_KEY (if using AI chat)
+    # - KHALTI_SECRET_KEY, KHALTI_PUBLIC_KEY (if using Khalti)
+    # - ESEWA_MERCHANT_PASSWORD (if using eSewa)

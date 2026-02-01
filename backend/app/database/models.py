@@ -63,25 +63,6 @@ class ChatSession(Base):
     )
 
 
-class Payment(Base):
-    """Payment transaction database model"""
-    __tablename__ = "payments"
-
-    id = Column(String(36), primary_key=True, index=True)
-    transaction_id = Column(String(100), unique=True, index=True, nullable=False)
-    customer_name = Column(String(100), nullable=False)
-    customer_email = Column(String(255), nullable=False, index=True)
-    amount = Column(Float, nullable=False)
-    currency = Column(String(10), default="NPR")
-    status = Column(String(50), default="pending", index=True)  # pending, completed, failed
-    payment_method = Column(String(50), nullable=False)  # khalti, esewa
-    description = Column(Text, nullable=True)
-    return_url = Column(String(500), nullable=True)
-    created_at = Column(DateTime, server_default=func.now(), nullable=False, index=True)
-    updated_at = Column(DateTime, server_default=func.now(), onupdate=func.now(), nullable=False)
-
-    __table_args__ = (
-        Index('idx_payment_status', 'status'),
-        Index('idx_payment_created', 'created_at'),
-        Index('idx_payment_email', 'customer_email'),
-    )
+# Payment model removed
+# The `Payment` SQLAlchemy model and corresponding `payments` table have been removed from the schema.
+# If you need to restore payments later, add the model back and provide migration scripts.

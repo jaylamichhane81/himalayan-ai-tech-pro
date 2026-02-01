@@ -9,17 +9,32 @@ from datetime import datetime, timedelta
 import jwt
 import os
 from ..models import AdminLogin, AdminToken
+from ..middleware import limiter
 
 router = APIRouter(prefix="/auth")
 
 # Security configuration from environment variables
-SECRET_KEY = os.getenv("JWT_SECRET", "himalayan-secret-key-change-in-production")
+# In production, these MUST be set via environment - no defaults for secrets
+ENVIRONMENT = os.getenv("ENVIRONMENT", "development")
+
+SECRET_KEY = os.getenv("JWT_SECRET")
+if not SECRET_KEY:
+    if ENVIRONMENT == "production":
+        raise RuntimeError("JWT_SECRET environment variable is required in production")
+    SECRET_KEY = "dev-secret-key-change-in-production"  # Dev only
+
 ALGORITHM = "HS256"
 ACCESS_TOKEN_EXPIRE_MINUTES = 30
 
-# Admin credentials from environment variables
-ADMIN_USERNAME = os.getenv("ADMIN_USERNAME", "admin")
-ADMIN_PASSWORD = os.getenv("ADMIN_PASSWORD", "admin123")
+# Admin credentials from environment variables - strict in production
+ADMIN_USERNAME = os.getenv("ADMIN_USERNAME")
+ADMIN_PASSWORD = os.getenv("ADMIN_PASSWORD")
+if not ADMIN_USERNAME or not ADMIN_PASSWORD:
+    if ENVIRONMENT == "production":
+        raise RuntimeError("ADMIN_USERNAME and ADMIN_PASSWORD required in production")
+    # Dev defaults
+    ADMIN_USERNAME = "admin"
+    ADMIN_PASSWORD = "admin123"
 
 security = HTTPBearer()
 
