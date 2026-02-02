@@ -137,7 +137,7 @@ class SystemVerifier:
         try:
             payload = {
                 "username": os.getenv("ADMIN_USERNAME", "admin"),
-                "password": os.getenv("ADMIN_PASSWORD", "Admin@2026")
+                "password": os.getenv("ADMIN_PASSWORD")
             }
             response = requests.post(f"{self.backend_url}/auth/login", json=payload, timeout=5)
             

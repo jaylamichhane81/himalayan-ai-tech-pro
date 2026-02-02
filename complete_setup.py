@@ -186,9 +186,10 @@ Manual tests:
   $ curl https://your-backend.onrender.com/health
 
   # Test 2: Login
-  $ curl -X POST https://your-backend.onrender.com/auth/login \\
-    -H "Content-Type: application/json" \\
-    -d '{{"username":"admin","password":"admin123"}}'
+  # Use the ADMIN_PASSWORD environment variable (do NOT hardcode passwords)
+  $ curl -X POST https://your-backend.onrender.com/auth/login \
+    -H "Content-Type: application/json" \
+    -d '{"username":"admin","password":"'$ADMIN_PASSWORD'"}'
 
   # Test 3: Open frontend
   Visit: https://your-frontend.vercel.app

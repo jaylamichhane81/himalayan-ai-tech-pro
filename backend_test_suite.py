@@ -11,7 +11,7 @@ from datetime import datetime
 # Configuration
 BACKEND_URL = os.getenv("BACKEND_URL", "http://localhost:10000")
 ADMIN_USERNAME = os.getenv("ADMIN_USERNAME", "admin")
-ADMIN_PASSWORD = os.getenv("ADMIN_PASSWORD", "admin123")
+ADMIN_PASSWORD = os.getenv("ADMIN_PASSWORD")
 
 class APITester:
     def __init__(self, base_url: str):
