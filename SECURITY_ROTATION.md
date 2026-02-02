@@ -21,6 +21,11 @@
 2. Rotate the `JWT_SECRET` value and update runtime environment variables.
 3. Change the admin password in production systems and any service accounts.
 
+## Local cleanup performed
+- Backed up local `backend/.env` to `backend/.env.bak` (not tracked in git).
+- Created a sanitized placeholder `backend/.env` (placeholders only — keep it untracked).
+- Added `backend/.env.bak` to `.gitignore` to avoid accidental commits.
+
 ## Update deployments & CI
 1. Update GitHub repository secrets (`SENDGRID_API_KEY`, `OPENAI_API_KEY`, `DATABASE_URL`, `JWT_SECRET`, `ADMIN_PASSWORD`) via GitHub settings or CLI.
 2. Update Vercel/Render/Other hosting environment variables to new secrets.
