@@ -55,3 +55,6 @@ Thumbs.db
 *.db
 *.sqlite
 *.sqlite3
+
+# Backup of local env files
+backend/.env.bak
